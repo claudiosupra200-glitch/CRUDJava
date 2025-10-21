@@ -4,17 +4,23 @@
  */
 package Janelas;
 
+import Model.ProdutoTableModel;
+
 /**
  *
  * @author claudio.ncjunior
  */
 public class CadastroProduto extends javax.swing.JFrame {
 
+    ProdutoTableModel modelo = new ProdutoTableModel();
+    
     /**
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
         initComponents();
+        
+        jTProdutos.setModel(modelo);
     }
 
     /**
@@ -27,7 +33,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTTabela = new javax.swing.JTable();
+        jTProdutos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,7 +48,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTTabela.setModel(new javax.swing.table.DefaultTableModel(
+        jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +59,7 @@ public class CadastroProduto extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTTabela);
+        jScrollPane2.setViewportView(jTProdutos);
 
         jLabel1.setBackground(new java.awt.Color(153, 255, 153));
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semibold", 1, 18)); // NOI18N
@@ -227,8 +233,8 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTDescricao;
+    private javax.swing.JTable jTProdutos;
     private javax.swing.JTextField jTQuantidade;
-    private javax.swing.JTable jTTabela;
     private javax.swing.JTextField jTValor;
     // End of variables declaration//GEN-END:variables
 }
