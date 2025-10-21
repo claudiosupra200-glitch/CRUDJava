@@ -4,6 +4,9 @@
  */
 package Janelas;
 
+import BD.Conexao;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author claudio.ncjunior
@@ -15,6 +18,12 @@ public class CadastroProduto extends javax.swing.JFrame {
      */
     public CadastroProduto() {
         initComponents();
+        if (Conexao.getConnection() != null){
+            JOptionPane.showMessageDialog(rootPane, "Conexão realizada!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Falha na Conexão!!!!!!!!!!!!!!");
+        }
+        
     }
 
     /**
