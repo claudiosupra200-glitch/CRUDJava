@@ -5,6 +5,7 @@
 package Janelas;
 
 import Model.ProdutoTableModel;
+import Objetos.Produto;
 
 /**
  *
@@ -13,13 +14,13 @@ import Model.ProdutoTableModel;
 public class CadastroProduto extends javax.swing.JFrame {
 
     ProdutoTableModel modelo = new ProdutoTableModel();
-    
+
     /**
      * Creates new form CadastroProduto
      */
     public CadastroProduto() {
         initComponents();
-        
+
         jTProdutos.setModel(modelo);
     }
 
@@ -184,7 +185,35 @@ public class CadastroProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jTQuantidadeActionPerformed
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
-        // TODO add your handling code here:
+        Produto p = new Produto();
+        p.setDescricao(jTDescricao.getText());
+        p.setQuantidade(Integer.parseInt(jTQuantidade.getText().replace(",", ".")));
+        p.setValor(Double.valueOf(jTValor.getText()));
+        modelo.addLinha(p);
+        limpaCampos();
+
+    }
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        if (jTProdutos.getSelectedRow() != -1) {
+            modelo.removeLinha(jTProdutos.getSelectedRow());
+        }
+    }
+
+    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {
+        if (jTProdutos.getSelectedRow() != -1) {
+            Produto p = modelo.pegaDadosLinha(jTProdutos.getSelectedRow());
+            jTDescricao.setText(p.getDescricao());
+            jTQuantidade.setText(String.valueOf(p.getQuantidade()));
+            jTValor.setText(String.valueOf(p.getValor()));
+
+        }
+    }
+
+    private void limpaCampos() {
+        jTDescricao.setText("");
+        jTQuantidade.setText("");
+        jTValor.setText("");
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     /**
