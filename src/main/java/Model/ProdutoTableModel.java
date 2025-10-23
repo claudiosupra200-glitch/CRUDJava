@@ -4,6 +4,7 @@
  */
 package Model;
 
+import DAO.ProdutoDAO;
 import Objetos.Produto;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,7 @@ public class ProdutoTableModel extends AbstractTableModel {
     }
 
     @Override
-      public Object getValueAt(int linha, int coluna) {
+    public Object getValueAt(int linha, int coluna) {
         switch (coluna) {
             case 0:
                 return dados.get(linha).getDescricao();
@@ -45,18 +46,36 @@ public class ProdutoTableModel extends AbstractTableModel {
         }
         return null;
     }
+
     public void addLinha(Produto p) {
         this.dados.add(p);
         this.fireTableDataChanged();
     }
- 
+
     public void removeLinha(int linha) {
         this.dados.remove(linha);
         this.fireTableRowsDeleted(linha, linha);
     }
- 
+
     public Produto pegaDadosLinha(int linha) {
         return dados.get(linha);
     }
 
+    private void lerDados() {
+        ProdutoDAO pdao = new ProdutoDAO();
+        for (Produto p : pdao.read()) {
+            this.addLinha(p);
+
+        }
+        this.fireTableDataChanged();
+
+    }
+    
+    public void recarregaTabela(){
+        this.dados.clear();
+        lerDados();
+        this.fireTableDataChanged();
+        
+        
+    }
 }

@@ -22,6 +22,9 @@ public class CadastroProduto extends javax.swing.JFrame {
         initComponents();
 
         jTProdutos.setModel(modelo);
+        modelo.recarregaTabela();
+        
+        
     }
 
     /**
