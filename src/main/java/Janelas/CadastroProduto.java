@@ -24,8 +24,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jTProdutos.setModel(modelo);
         modelo.recarregaTabela();
-        
-        
+
     }
 
     /**
@@ -64,6 +63,11 @@ public class CadastroProduto extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTProdutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTProdutosMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTProdutos);
 
         jLabel1.setBackground(new java.awt.Color(153, 255, 153));
@@ -100,8 +104,18 @@ public class CadastroProduto extends javax.swing.JFrame {
         });
 
         jBAlterar.setText("Alterar");
+        jBAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAlterarActionPerformed(evt);
+            }
+        });
 
         jBExcluir.setText("Excluir");
+        jBExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBExcluirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -191,40 +205,51 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         Produto p = new Produto();
         ProdutoDAO dao = new ProdutoDAO();
-        
-        
+
         p.setDescricao(jTDescricao.getText());
         p.setQuantidade(Integer.parseInt(jTQuantidade.getText().replace(",", ".")));
         p.setValor(Double.valueOf(jTValor.getText()));
-        
-        
+
         dao.create(p);
         modelo.recarregaTabela();
         limpaCampos();
 
     }
 
-    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        if (jTProdutos.getSelectedRow() != -1) {
-            modelo.removeLinha(jTProdutos.getSelectedRow());
-        }
-    }
 
-    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {
-        if (jTProdutos.getSelectedRow() != -1) {
-            Produto p = modelo.pegaDadosLinha(jTProdutos.getSelectedRow());
-            jTDescricao.setText(p.getDescricao());
-            jTQuantidade.setText(String.valueOf(p.getQuantidade()));
-            jTValor.setText(String.valueOf(p.getValor()));
-
-        }
-    }
 
     private void limpaCampos() {
         jTDescricao.setText("");
         jTQuantidade.setText("");
         jTValor.setText("");
     }//GEN-LAST:event_jBCadastrarActionPerformed
+
+    private void jBAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAlterarActionPerformed
+        if (jTProdutos.getSelectedRow() != -1) {
+            modelo.setValueAt(jTDescricao.getText(), jTProdutos.getSelectedRow(), 0);
+            modelo.setValueAt(jTQuantidade.getText(), jTProdutos.getSelectedRow(), 1);
+            modelo.setValueAt(jTValor.getText(), jTProdutos.getSelectedRow(), 2);
+
+            Produto p = modelo.pegaDadosLinha(jTProdutos.getSelectedRow());
+            ProdutoDAO dao = new ProdutoDAO();
+            dao.update(p);
+            limpaCampos();
+            modelo.recarregaTabela();
+        }
+    }//GEN-LAST:event_jBAlterarActionPerformed
+
+    private void jBExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBExcluirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBExcluirActionPerformed
+
+    private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
+        if (jTProdutos.getSelectedRow() != -1) {
+            Produto p = modelo.pegaDadosLinha(jTProdutos.getSelectedRow());
+            jTDescricao.setText(p.getDescricao());
+            jTQuantidade.setText(String.valueOf(p.getQuantidade()));
+            jTValor.setText(String.valueOf(p.getValor()));
+        }
+    }//GEN-LAST:event_jTProdutosMouseClicked
 
     /**
      * @param args the command line arguments
