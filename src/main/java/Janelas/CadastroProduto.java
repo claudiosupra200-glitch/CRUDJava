@@ -7,6 +7,7 @@ package Janelas;
 import DAO.ProdutoDAO;
 import Model.ProdutoTableModel;
 import Objetos.Produto;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -244,6 +245,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         ProdutoDAO dao = new ProdutoDAO();
         dao.delete(p);
         modelo.recarregaTabela(); 
+        JOptionPane.showConfirmDialog(null, "oi");
     }//GEN-LAST:event_jBExcluirActionPerformed
 
     private void jTProdutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTProdutosMouseClicked
