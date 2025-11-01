@@ -1,5 +1,8 @@
+Model\UsuarioTableModel.class
+DAO\UsuarioDAO.class
 Janelas\CadastroProduto$3.class
 Janelas\CadastroProduto.class
+Objetos\Usuario.class
 Janelas\CadastroProduto$2.class
 Janelas\CadastroProduto$1.class
 Objetos\Produto.class

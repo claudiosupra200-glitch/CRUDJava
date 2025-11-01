@@ -4,6 +4,8 @@
  */
 package Objetos;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 /**
  *
  * @author claudio.ncjunior
@@ -100,8 +102,13 @@ public class Usuario {
     /**
      * @param senhaHash the senhaHash to set
      */
-    public void setSenhaHash(String senhaHash) {
-        this.senhaHash = senhaHash;
+    public void setSenhaHash(String senha) {
+        this.senhaHash = encoder.encode(senha);
+    }
+    
+    public boolean verificarSenha (String senhaDigitada){
+        return encoder.matches(senhaDigitada, this.senha);
+        
     }
     
     
